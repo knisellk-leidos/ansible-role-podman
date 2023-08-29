@@ -1,7 +1,4 @@
 ---
-# role: ansible-role-podman
-# file: tasks/main.yml
-
-- name: Import tasks for role ansible-role-podman
+- name: Import tasks
   import_tasks: tasks.yml
-  when: podman_enabled | bool
+  #when: podman_enabled | bool

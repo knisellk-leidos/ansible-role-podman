@@ -1,8 +1,12 @@
 ---
-# role: ansible-role-podman
-# file: vars/RedHat.yml
-
 podman_packages:
+  - crun
+  - epel-release
+  - fuse-overlayfs
+  - git
   - podman
+  - podman-plugins
+  - shadow-utils
+  - slirp4netns
 
 podman_manual_mapping: True

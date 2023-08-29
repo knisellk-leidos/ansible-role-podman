@@ -1,5 +1,3 @@
-# ansible-role-podman [![Build Status](https://travis-ci.org/jam82/ansible-role-podman.svg?branch=master)](https://travis-ci.org/jam82/ansible-role-podman)
-
 Ansible role for setting up [podman](https://podman.io).
 
 As podman now creates a working default configuration, the variable
@@ -10,13 +8,12 @@ which made explicit configuration of `file` necessary.
 
 ## Supported Platforms
 
-* Archlinux
-* CentOS 7
-* Ubuntu 18.04
+* Rocky Linux 8
 
 ## Requirements
 
 Ansible 2.7 or higher is required for defaults/main/*.yml to work correctly.
+
 
 ## Variables
 
@@ -36,10 +33,6 @@ Variables for this role:
 | podman_conf_namespace | '' | string | /etc/container/libpod.conf: namespace (=default namespace) |
 | podman_storage_driver | 'overlay' | string | storage driver |
 | podman_storage_mountopt | 'nodev' | string | storage driver mount options |
-
-## Dependencies
-
-None.
 
 ## Example Playbook
 

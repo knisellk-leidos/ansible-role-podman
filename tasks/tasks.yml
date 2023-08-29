@@ -17,14 +17,11 @@
     loop_var: vars_file
 
 - name: Include tasks for installing podman
-  include_tasks: setup.yml
-
-- name: Include tasks for /etc/containers configuration
-  include_tasks: conf.yml
-  when: podman_configure | bool
-
-- name: Include tasks for sysctl configuration
-  include_tasks: sysctl.yml
+  include_tasks: install.yml
 
 - name: Include tasks for subuid/subgid mappings and user config
   include_tasks: users.yml
+
+- name: Include tasks for config files and sysctl
+  include_tasks: config-files.yml
+  #when: podman_configure | bool

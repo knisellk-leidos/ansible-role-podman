@@ -1,0 +1,36 @@
+---
+# role: ansible-role-podman
+# file: tasks/conf.yml
+
+- name: Configure /etc/container/*.conf
+  template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  loop:
+    - etc/containers/libpod.conf
+    - etc/containers/registries.conf
+    - etc/containers/storage.conf
+
+- name: Replace system-wide containers.conf
+  template:
+    src: containers.conf.j2
+    dest: /usr/share/containers/containers.conf
+
+- name: Create directory for storing container volumes and images
+  ansible.builtin.file:
+    path: /work/storage
+    state: directory
+    owner: "{{ podman_user }}"
+    group: "{{ podman_group }}"
+    mode: '0700'
+
+- name: Insert user-specific storage.conf
+  template:
+    src: storage.conf.j2
+    dest: 
+
+- 

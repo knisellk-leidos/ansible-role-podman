@@ -1,0 +1,6 @@
+---
+# requirements.yml
+collections:
+  - ansible.posix
+
+# TODO - add a section here for air gap installation
