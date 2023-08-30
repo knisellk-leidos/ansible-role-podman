@@ -4,8 +4,12 @@
   become: true
   gather_facts: true
 
-  vars_files:
-    - vars/main.yml
+  vars:
+    podman_user: podman
+    podman_group: podman
+    podman_search_registries:
+      - "docker.io"
+    podman_insecure_registries: []
   
   roles:
     - role: ../ansible-role-podman

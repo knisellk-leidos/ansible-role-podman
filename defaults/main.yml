@@ -1,12 +1,14 @@
 ---
 podman_packages:
   - crun
-  - epel-release
   - fuse-overlayfs
   - git
   - podman
   - podman-plugins
   - shadow-utils
   - slirp4netns
-
-podman_manual_mapping: True
+podman_user: podman
+podman_group: podman
+podman_search_registries:
+  - "docker.io"
+podman_insecure_registries: []

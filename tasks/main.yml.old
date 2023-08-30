@@ -1,4 +1,0 @@
----
-- name: Import tasks
-  import_tasks: tasks.yml
-  #when: podman_enabled | bool

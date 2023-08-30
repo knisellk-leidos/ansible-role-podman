@@ -6,3 +6,5 @@
   package:
     name: "{{ podman_packages }}"
     state: present
+  tags: 
+    - packages

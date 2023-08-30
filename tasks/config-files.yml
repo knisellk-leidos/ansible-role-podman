@@ -1,23 +1,11 @@
 ---
-- name: 
-
-- name: Configure /etc/container/*.conf
-  template:
-    src: "{{ item }}.j2"
-    dest: "/{{ item }}"
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-  loop:
-    - etc/containers/libpod.conf
-    - etc/containers/registries.conf
-    - etc/containers/storage.conf
-
 - name: Replace system-wide containers.conf
   template:
     src: containers.conf.j2
     dest: /usr/share/containers/containers.conf
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Create directory for storing container volumes and images
   ansible.builtin.file:
@@ -27,9 +15,23 @@
     group: "{{ podman_group }}"
     mode: '0700'
 
-- name: Insert user-specific storage.conf
+- name: Get user home - getent
+  ansible.builtin.getent:
+    database: passwd
+    key: "{{ podman_user }}"
+
+- name: Get user home - set_fact
+  ansible.builtin.set_fact:
+    podman_user_home: "{{ getent_passwd[username][4] }}"
+
+- name: Get user home - verify
+  ansible.builtin.debug:
+    msg: "User's home: {{ podman_user_home }}"
+
+- name: Create user-specific storage.conf
   template:
     src: storage.conf.j2
-    dest: 
-
-- 
+    dest: "{{ podman_user_home }}/.config/containers/storage.conf"
+    owner: "{{ podman_user}}"
+    group: "{{ podman_group}}"
+    mode: '0700'

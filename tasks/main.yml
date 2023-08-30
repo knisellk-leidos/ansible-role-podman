@@ -3,7 +3,10 @@
   include_tasks: install.yml
 
 - name: Create and configure user
-  include_tasks: users.yml
+  include_tasks: user.yml
 
 - name: Set up config files
   include_tasks: config-files.yml
+
+- name: Test image pull
+  include_tasks: test.yml
