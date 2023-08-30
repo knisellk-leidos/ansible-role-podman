@@ -549,7 +549,7 @@ events_logger = "file"
 
 # Default OCI runtime
 #
-runtime = "crun"
+runtime = "{{ podman_runtime }}"
 
 # List of the OCI runtimes that support --format=json. When json is supported
 # engine will use it for reporting nicer errors.

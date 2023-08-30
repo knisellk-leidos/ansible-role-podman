@@ -1,15 +1,14 @@
 ---
-- name: Show structure of current role
+- name: Example playbook
   hosts: podman_hosts
   become: true
   gather_facts: true
 
   vars:
+    container_storage: /opt/containers/storage
     podman_user: podman
     podman_group: podman
-    podman_search_registries:
-      - "docker.io"
-    podman_insecure_registries: []
+    podman_runtime: crun
   
   roles:
-    - role: ../ansible-role-podman
+    - role: ../rootless_podman

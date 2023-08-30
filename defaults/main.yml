@@ -1,4 +1,5 @@
 ---
+container_storage: /opt/containers/storage
 podman_packages:
   - crun
   - fuse-overlayfs
@@ -9,6 +10,5 @@ podman_packages:
   - slirp4netns
 podman_user: podman
 podman_group: podman
-podman_search_registries:
-  - "docker.io"
-podman_insecure_registries: []
+podman_runtime: crun
+runroot: "{{ podman_user_home }}/containers/runroot"

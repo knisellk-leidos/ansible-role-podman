@@ -1,0 +1,8 @@
+---
+- name: Create sysctl conf file for user namespaces
+  ansible.posix.sysctl:
+    name: user.max_user_namespaces
+    value: '15000'
+    state: present
+    sysctl_file: /etc/sysctl.d/99-user-namespaces.conf
+    reload: true

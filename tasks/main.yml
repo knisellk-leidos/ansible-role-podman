@@ -1,12 +1,15 @@
 ---
 - name: Install packages
-  include_tasks: install.yml
+  ansible.builtin.include_tasks: install.yml
+
+- name: Create sysctl conf file and reload
+  ansible.builtin.include_tasks: sysctl.yml
 
 - name: Create and configure user
-  include_tasks: user.yml
+  ansible.builtin.include_tasks: user.yml
 
 - name: Set up config files
-  include_tasks: config-files.yml
+  ansible.builtin.include_tasks: config-files.yml
 
-- name: Test image pull
-  include_tasks: test.yml
+- name: Test basic container functionality
+  ansible.builtin.include_tasks: test.yml

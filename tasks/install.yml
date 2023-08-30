@@ -1,10 +1,5 @@
 ---
-# role: ansible-role-podman
-# file: tasks/install.yml
-
 - name: Install podman packages
-  package:
+  ansible.builtin.package:
     name: "{{ podman_packages }}"
     state: present
-  tags: 
-    - packages

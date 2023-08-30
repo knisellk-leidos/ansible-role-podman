@@ -1,8 +1,8 @@
 {{ ansible_managed | comment }}
 [storage]                                                                         
   driver = "overlay"                                                                
-  runroot = "/run/$UID/containers"                                           
-  graphroot = "/opt/containers/storage"                                         
+  runroot = "{{ runroot }}"                                           
+  graphroot = "{{ container_storage }}"                                         
                                                                                   
 [storage.options]                                                                 
   size = "" 

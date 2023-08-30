@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test_pod
+spec:
+  containers:
+  - command: ["echo", "Testing"]
+    image: docker.io/library/httpd:latest
+    name: test_container
+    volumeMounts:
+    - mountPath: /opt/test_volume
+      name: test_volume
+  restartPolicy: Never
+  volumes:
+  - name: test_volume
+    persistentVolumeClaim:
+      claimName: test_volume
+  securityContext:
+    seLinuxOptions:
+      type: spc_t

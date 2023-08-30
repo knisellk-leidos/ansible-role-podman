@@ -2,5 +2,7 @@
 # requirements.yml
 collections:
   - ansible.posix
+  - community.general
+  - containers.podman
 
-# TODO - add a section here for air gap installation
+# TODO - add a section here for air gap installation; grab collections files and point installation to those files

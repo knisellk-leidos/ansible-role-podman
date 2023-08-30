@@ -1,6 +1,6 @@
 ---
 - name: Replace system-wide containers.conf
-  template:
+  ansible.builtin.template:
     src: containers.conf.j2
     dest: /usr/share/containers/containers.conf
     owner: root
@@ -22,16 +22,43 @@
 
 - name: Get user home - set_fact
   ansible.builtin.set_fact:
-    podman_user_home: "{{ getent_passwd[username][4] }}"
+    podman_user_home: "{{ getent_passwd[podman_user][4] }}"
 
 - name: Get user home - verify
   ansible.builtin.debug:
     msg: "User's home: {{ podman_user_home }}"
 
+- name: Create directory for runroot
+  ansible.builtin.file:
+    path: "{{ podman_user_home }}/containers/runroot"
+    state: directory
+    owner: "{{ podman_user }}"
+    group: "{{ podman_group }}"
+    mode: '0700'
+    recurse: true
+
+- name: Create directory for storage.conf
+  ansible.builtin.file:
+    path: "{{ podman_user_home }}/.config/containers"
+    state: directory
+    owner: "{{ podman_user }}"
+    group: "{{ podman_group }}"
+    mode: '0700'
+    recurse: true
+
 - name: Create user-specific storage.conf
-  template:
+  ansible.builtin.template:
     src: storage.conf.j2
     dest: "{{ podman_user_home }}/.config/containers/storage.conf"
-    owner: "{{ podman_user}}"
-    group: "{{ podman_group}}"
-    mode: '0700'
+    owner: "{{ podman_user }}"
+    group: "{{ podman_group }}"
+    mode: '0600'
+
+- name: Set SELinux contexts
+  community.general.sefcontext:
+    target: /var/lib/containers/storage
+    substitute: "{{ container_storage }}"
+    state: present
+
+- name: Apply new SELinux file context to filesystem
+  ansible.builtin.command: restorecon -Firv "{{ container_storage }}"
