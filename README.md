@@ -27,9 +27,6 @@ Make sure the required collections are installed (see above under Requirements)
     container_storage: /opt/containers/storage
     podman_user: podman
     podman_group: podman
-    podman_search_registries:
-      - "docker.io"
-    podman_insecure_registries: []
     podman_runtime: crun
 
   roles:
