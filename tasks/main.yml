@@ -1,4 +1,9 @@
 ---
-- name: Import tasks
-  import_tasks: tasks.yml
-  #when: podman_enabled | bool
+- name: Install packages
+  include_tasks: install.yml
+
+- name: Create and configure user
+  include_tasks: users.yml
+
+- name: Set up config files
+  include_tasks: config-files.yml

@@ -1,10 +1,4 @@
-Ansible role for setting up [podman](https://podman.io).
-
-As podman now creates a working default configuration, the variable
-`podman_configure` was introduced to skip custom configuration.
-In erlier versions podman used `journald` as events_logger
-and threw an error in rootless mode,
-which made explicit configuration of `file` necessary.
+Ansible role for setting up rootless podman
 
 ## Supported Platforms
 
@@ -13,7 +7,6 @@ which made explicit configuration of `file` necessary.
 ## Requirements
 
 Ansible 2.7 or higher is required for defaults/main/*.yml to work correctly.
-
 
 ## Variables
 
@@ -59,19 +52,3 @@ For a basic setup with default values run:
   roles:
     - role: ansible-role-podman
 ```
-
-## License and Author
-
-* Author:: Jonas Mauer (<jam@kabelmail.net>)
-* Copyright:: 2019, Jonas Mauer
-
-Licensed under MIT License;
-See LICENSE file in repository.
-
-## References
-
-* [libpod Installation Instructions](https://github.com/containers/libpod/blob/master/install.md)
-* [podman manpage](https://github.com/containers/libpod/blob/master/docs/podman.1.md)
-* [ArchWiki - Linux Containers](https://wiki.archlinux.org/index.php/Linux_Containers)
-* [vbatts: centos7 - non-root podman](https://asciinema.org/a/221441)
-* [A preview of running containers without root in RHEL 7.6](https://www.redhat.com/en/blog/preview-running-containers-without-root-rhel-76)

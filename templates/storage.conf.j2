@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+[storage]                                                                         
+  driver = "overlay"                                                                
+  runroot = "/run/$UID/containers"                                           
+  graphroot = "/opt/containers/storage"                                         
+                                                                                  
+[storage.options]                                                                 
+  size = "" 
+                                                                                  
+[storage.options.overlay]
+  mount_program = "/usr/bin/fuse-overlayfs"
+  mountopt = "nodev"

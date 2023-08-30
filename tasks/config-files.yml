@@ -1,6 +1,5 @@
 ---
-# role: ansible-role-podman
-# file: tasks/conf.yml
+- name: 
 
 - name: Configure /etc/container/*.conf
   template:
@@ -22,7 +21,7 @@
 
 - name: Create directory for storing container volumes and images
   ansible.builtin.file:
-    path: /work/storage
+    path: "{{ container_storage }}"
     state: directory
     owner: "{{ podman_user }}"
     group: "{{ podman_group }}"

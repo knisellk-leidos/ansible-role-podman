@@ -1,0 +1,12 @@
+---
+- name: Create user
+  ansible.builtin.user:
+    name: "{{ podman_user }}"
+    group: "{{ podman_group }}"
+    shell: /bin/bash
+
+- name: Configure subuids and subgids
+  ansible.builtin.command:
+    cmd: usermod --add-subuids 100000-165535 --add-subgids 100000-165535 "{{ podman_user }}"
+
+
